@@ -22,9 +22,16 @@ export class AuthService {
         picture: profile.picture,
       } as User;
       const createdUsers = this.userRepository.create(profileUser);
-      await this.userRepository.save(createdUsers);
+      user = await this.userRepository.save(createdUsers);
     }
-    return user;
+    return {
+      id: user.id,
+      googleId: profile.googleId,
+      email: profile.email,
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      picture: profile.picture,
+    };
   }
 
   async validateUserById(googleId: string): Promise<any> {
@@ -32,6 +39,7 @@ export class AuthService {
       where: { googleId: googleId },
     });
     return {
+      id: user.id,
       googleId: user.googleId,
       email: user.email,
       firstName: user.firstName,
