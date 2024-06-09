@@ -33,7 +33,7 @@ export class User {
     name: 'first_name',
     type: 'varchar',
     length: 255,
-    nullable: false,
+    nullable: true,
   })
   firstName: string;
 
@@ -41,7 +41,7 @@ export class User {
     name: 'last_name',
     type: 'varchar',
     length: 255,
-    nullable: false,
+    nullable: true,
   })
   lastName: string;
 
