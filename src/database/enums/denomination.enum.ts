@@ -1,0 +1,17 @@
+export enum Denomination {
+  Anglican = 1,
+  Baptist = 2,
+  Catholic = 3,
+  Charismatic = 4,
+  Episcopalian = 5,
+  Evangelical = 6,
+  Lutheran = 7,
+  Methodist = 8,
+  NonDenominational = 9,
+  Orthodox = 10,
+  Pentecostal = 11,
+  Presbyterian = 12,
+  Protestant = 13,
+  Reformed = 14,
+  Other = 15,
+}
