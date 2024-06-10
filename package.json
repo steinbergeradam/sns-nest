@@ -20,6 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "db:migrate": "npx typeorm-ts-node-commonjs migration:run -d src/database/data-source.ts",
     "db:revert": "npx typeorm-ts-node-commonjs migration:revert -d src/database/data-source.ts",
+    "db:sync": "npx typeorm-ts-node-commonjs schema:sync -d src/database/data-source.ts",
     "prepare": "husky"
   },
   "dependencies": {

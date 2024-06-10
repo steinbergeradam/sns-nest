@@ -1,60 +1,51 @@
 import {
   Entity,
   PrimaryGeneratedColumn,
-  Column,
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  Column,
 } from 'typeorm';
 
-@Entity('users')
-export class User {
+@Entity('addresses')
+export class Address {
   @PrimaryGeneratedColumn('uuid', {
     name: 'id',
-    primaryKeyConstraintName: 'pk_users',
+    primaryKeyConstraintName: 'pk_addresses',
   })
-  id: string;
+  id: number;
 
   @Column({
-    name: 'google_id',
+    name: 'street',
     type: 'varchar',
     length: 255,
     nullable: false,
   })
-  googleId: string;
+  street: string;
 
   @Column({
-    name: 'email',
+    name: 'city',
     type: 'varchar',
     length: 255,
     nullable: false,
-    unique: true,
   })
-  email: string;
+  city: string;
 
   @Column({
-    name: 'first_name',
+    name: 'state',
     type: 'varchar',
     length: 255,
-    nullable: true,
+    nullable: false,
   })
-  firstName?: string;
+  state: string;
 
   @Column({
-    name: 'last_name',
+    name: 'zip',
     type: 'varchar',
     length: 255,
-    nullable: true,
+    nullable: false,
   })
-  lastName?: string;
-
-  @Column({
-    name: 'picture',
-    type: 'varchar',
-    length: 255,
-    nullable: true,
-  })
-  picture?: string;
+  zip: string;
 
   @CreateDateColumn({
     name: 'created_at',

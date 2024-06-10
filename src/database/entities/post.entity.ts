@@ -5,56 +5,53 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import { User } from './user.entity';
 
-@Entity('users')
-export class User {
+@Entity('posts')
+export class Post {
   @PrimaryGeneratedColumn('uuid', {
     name: 'id',
-    primaryKeyConstraintName: 'pk_users',
+    primaryKeyConstraintName: 'pk_posts',
   })
   id: string;
 
+  @ManyToOne(() => User, (user) => user.id, {
+    nullable: false,
+    eager: true,
+  })
+  @JoinColumn({
+    name: 'author_id',
+    foreignKeyConstraintName: 'fk_post_author_id',
+  })
+  author: User;
+
+  @ManyToOne(() => User, (user) => user.id, {
+    nullable: false,
+    eager: true,
+  })
+  @JoinColumn({
+    name: 'recipient_id',
+    foreignKeyConstraintName: 'fk_post_recipient_id',
+  })
+  recipient: User;
+
   @Column({
-    name: 'google_id',
-    type: 'varchar',
-    length: 255,
+    name: 'content',
+    type: 'text',
     nullable: false,
   })
-  googleId: string;
+  content: string;
 
   @Column({
-    name: 'email',
-    type: 'varchar',
-    length: 255,
-    nullable: false,
-    unique: true,
-  })
-  email: string;
-
-  @Column({
-    name: 'first_name',
+    name: 'media',
     type: 'varchar',
     length: 255,
     nullable: true,
   })
-  firstName?: string;
-
-  @Column({
-    name: 'last_name',
-    type: 'varchar',
-    length: 255,
-    nullable: true,
-  })
-  lastName?: string;
-
-  @Column({
-    name: 'picture',
-    type: 'varchar',
-    length: 255,
-    nullable: true,
-  })
-  picture?: string;
+  media?: string;
 
   @CreateDateColumn({
     name: 'created_at',
