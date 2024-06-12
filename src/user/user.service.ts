@@ -45,7 +45,8 @@ export class UserService {
         where: { id: dto.address.id },
       });
       if (!address) {
-        throw new Error('Address not found');
+        const newAddress = this.addressRepository.create(dto.address);
+        await this.addressRepository.save(newAddress);
       }
       address.city = dto.address.city || address.city;
       address.state = dto.address.state || address.state;
