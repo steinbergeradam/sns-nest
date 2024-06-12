@@ -42,18 +42,20 @@ export class UserService {
 
     if (dto.address) {
       const address = await this.addressRepository.findOne({
-        where: { id: dto.address.id },
+        where: { id: user.address?.id },
       });
       if (!address) {
         const newAddress = this.addressRepository.create(dto.address);
-        await this.addressRepository.save(newAddress);
+        const addedAddress = await this.addressRepository.save(newAddress);
+        user.address = addedAddress;
+      } else {
+        address.city = dto.address.city || address.city;
+        address.state = dto.address.state || address.state;
+        address.street = dto.address.street || address.street;
+        address.zip = dto.address.zip || address.zip;
+        const addedAddress = await this.addressRepository.save(address);
+        user.address = addedAddress;
       }
-      address.city = dto.address.city || address.city;
-      address.state = dto.address.state || address.state;
-      address.street = dto.address.street || address.street;
-      address.zip = dto.address.zip || address.zip;
-      this.addressRepository.save(address);
-      user.address = address;
     }
 
     user.firstName = dto.firstName || user.firstName;
