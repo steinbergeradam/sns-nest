@@ -13,7 +13,7 @@ export class Address {
     name: 'id',
     primaryKeyConstraintName: 'pk_addresses',
   })
-  id: number;
+  id: string;
 
   @Column({
     name: 'street',
